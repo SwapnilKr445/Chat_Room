@@ -1,0 +1,158 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chatroom</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 20px;
+        }
+
+        input, button {
+            margin: 5px;
+        }
+
+        #chat-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .online {
+            color: green;
+        }
+
+        .offline {
+            color: red;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="username" placeholder="Enter your username">
+    <button onclick="joinChat()">Join Chat</button>
+    <div id="chat-container"></div>
+    <input type="text" id="message" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const socket = io.connect('http://localhost:5000');
+
+        function joinChat() {
+            const username = document.getElementById('username').value;
+            const room = '1234';  // Special key for the chatroom
+
+            socket.emit('join', { username, room });
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            const room = '1234';  // Special key for the chatroom
+            const username = document.getElementById('username').value;
+
+            socket.emit('message', { message, room, sender: username });
+        }
+
+        socket.on('update_status', (data) => {
+            const statusClass = data.status === 'online' ? 'online' : 'offline';
+            const username = data.username;
+            document.getElementById('chat-container').innerHTML += <p class="${statusClass}">${username} is ${data.status}</p>;
+        });
+
+        socket.on('message', (data) => {
+            const sender = data.sender;
+            const message = data.message;
+            document.getElementById('chat-container').innerHTML += <p><span style="font-weight: bold">${sender}:</span> ${message}</p>;
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chatroom</title>
+    <h1>Socket ChatRoom </h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 20px;
+        }
+
+        input, button {
+            margin: 5px;
+        }
+
+        #chat-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .online {
+            color: green;
+        }
+
+        .offline {
+            color: red;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="username" placeholder="Enter your username">
+    <button onclick="joinChat()">Join Chat</button>
+    <div id="chat-container"></div>
+    <input type="text" id="message" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const socket = io.connect('http://localhost:5000');
+
+        function joinChat() {
+            const username = document.getElementById('username').value;
+            const room = '1234';  // Special key for the chatroom
+
+            socket.emit('join', { username, room });
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            const room = '1234';  // Special key for the chatroom
+            const username = document.getElementById('username').value;
+
+            socket.emit('message', { message, room, sender: username });
+        }
+
+        socket.on('update_status', (data) => {
+            const statusClass = data.status === 'online' ? 'online' : 'offline';
+            const username = data.username;
+            document.getElementById('chat-container').innerHTML += <p class="${statusClass}">${username} is ${data.status}</p>;
+        });
+
+        socket.on('message', (data) => {
+            const sender = data.sender;
+            const message = data.message;
+            document.getElementById('chat-container').innerHTML += <p><span style="font-weight: bold">${sender}:</span> ${message}</p>;
+        });
+    </script>
+    <script src="server1.js"></script>
+</body>
+</html>
